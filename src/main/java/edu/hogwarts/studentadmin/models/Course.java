@@ -2,6 +2,7 @@ package edu.hogwarts.studentadmin.models;
 
 
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +15,7 @@ public class Course {
     private String subject;
     private int schoolYear;
     private boolean current;
-    @OneToOne
+    @ManyToOne
     private Teacher teacher;
     @OneToMany
     private List<Student> students;
