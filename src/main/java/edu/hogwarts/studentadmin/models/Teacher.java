@@ -100,6 +100,7 @@ public class Teacher {
     }
 
     // Constructors
+    public Teacher() {}
 
     public Teacher(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, boolean headOfHouse, EmpType employment, LocalDate employmentStart, LocalDate employmentEnd) {
         this.firstName = firstName;

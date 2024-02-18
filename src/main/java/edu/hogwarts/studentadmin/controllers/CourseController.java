@@ -66,6 +66,7 @@ public class CourseController {
 
     // POST
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Course createCourse(@RequestBody Course course) {
         return courseRepository.save(course);
     }
@@ -143,7 +144,4 @@ public class CourseController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
 }

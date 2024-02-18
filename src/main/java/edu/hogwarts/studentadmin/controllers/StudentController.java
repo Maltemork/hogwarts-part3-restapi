@@ -2,6 +2,7 @@ package edu.hogwarts.studentadmin.controllers;
 
 import edu.hogwarts.studentadmin.models.Student;
 import edu.hogwarts.studentadmin.repositories.StudentRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class StudentController {
 
     // POST
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Student createStudent(@RequestBody Student student) {
         return studentRepository.save(student);
     }

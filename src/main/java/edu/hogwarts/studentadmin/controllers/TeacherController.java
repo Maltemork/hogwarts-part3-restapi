@@ -2,6 +2,7 @@ package edu.hogwarts.studentadmin.controllers;
 
 import edu.hogwarts.studentadmin.models.Teacher;
 import edu.hogwarts.studentadmin.repositories.TeacherRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/teachers")
+@RestController
 public class TeacherController {
     // Fields
     private final TeacherRepository teacherRepository;
@@ -33,6 +35,7 @@ public class TeacherController {
 
     // POST
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Teacher createTeacher(@RequestBody Teacher teacher) {
         return teacherRepository.save(teacher);
     }
