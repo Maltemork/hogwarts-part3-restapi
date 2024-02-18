@@ -104,6 +104,8 @@ public class Course {
 
     // Extra methods
     public void setStudentToCourse(Student student) {
-
+        students.add(student);
     }
+
+
 }
