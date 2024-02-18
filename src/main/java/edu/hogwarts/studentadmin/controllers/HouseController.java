@@ -1,8 +1,6 @@
 package edu.hogwarts.studentadmin.controllers;
 
-import edu.hogwarts.studentadmin.models.Course;
 import edu.hogwarts.studentadmin.models.House;
-import edu.hogwarts.studentadmin.models.Teacher;
 import edu.hogwarts.studentadmin.repositories.HouseRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

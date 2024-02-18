@@ -11,17 +11,13 @@ public class Teacher {
     private boolean headOfHouse;
     private EmpType employment;
     private Date employmentStart;
-    private Date getEmploymentEnd;
+    private Date employmentEnd;
 
     //Getters & Setters
 
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -88,17 +84,17 @@ public class Teacher {
         this.employmentStart = employmentStart;
     }
 
-    public Date getGetEmploymentEnd() {
-        return getEmploymentEnd;
+    public Date getEmploymentEnd() {
+        return employmentEnd;
     }
 
-    public void setGetEmploymentEnd(Date getEmploymentEnd) {
-        this.getEmploymentEnd = getEmploymentEnd;
+    public void setEmploymentEnd(Date employmentEnd) {
+        this.employmentEnd = employmentEnd;
     }
 
     // Constructors
 
-    public Teacher(String firstName, String middleName, String lastName, Date dateOfBirth, House house, boolean headOfHouse, EmpType employment, Date employmentStart, Date getEmploymentEnd) {
+    public Teacher(String firstName, String middleName, String lastName, Date dateOfBirth, House house, boolean headOfHouse, EmpType employment, Date employmentStart, Date employmentEnd) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -107,10 +103,23 @@ public class Teacher {
         this.headOfHouse = headOfHouse;
         this.employment = employment;
         this.employmentStart = employmentStart;
-        this.getEmploymentEnd = getEmploymentEnd;
+        this.employmentEnd = employmentEnd;
     }
 
     public Teacher(String firstName, String lastName, Date dateOfBirth, House house) {
         this(firstName, "", lastName, dateOfBirth, house, false, null, null, null);
     }
+
+    public void copyFromTeacher(Teacher teacher) {
+        this.setFirstName(teacher.getFirstName());
+        this.setMiddleName(teacher.getMiddleName());
+        this.setLastName(teacher.getLastName());
+        this.setDateOfBirth(teacher.getDateOfBirth());
+        this.setHouse(teacher.getHouse());
+        this.setHeadOfHouse(teacher.isHeadOfHouse());
+        this.setEmployment(teacher.getEmployment());
+        this.setEmploymentStart(teacher.getEmploymentStart());
+        this.setEmploymentEnd(teacher.getEmploymentEnd());
+    }
+
 }

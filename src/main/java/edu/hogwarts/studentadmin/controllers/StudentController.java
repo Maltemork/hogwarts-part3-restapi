@@ -1,9 +1,7 @@
 package edu.hogwarts.studentadmin.controllers;
 
 import edu.hogwarts.studentadmin.models.Student;
-import edu.hogwarts.studentadmin.repositories.CourseRepository;
 import edu.hogwarts.studentadmin.repositories.StudentRepository;
-import edu.hogwarts.studentadmin.repositories.TeacherRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +22,6 @@ public class StudentController {
     }
 
     // Mapping
-
     // GET
     @GetMapping
     public List<Student> getAllStudents() {
