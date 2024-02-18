@@ -14,16 +14,12 @@ import java.util.Optional;
 @RestController
 public class StudentController {
     //Fields
-    private final CourseRepository courseRepository;
-    private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
 
     // Constructor
 
 
-    public StudentController(CourseRepository courseRepository, TeacherRepository teacherRepository, StudentRepository studentRepository) {
-        this.courseRepository = courseRepository;
-        this.teacherRepository = teacherRepository;
+    public StudentController(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
