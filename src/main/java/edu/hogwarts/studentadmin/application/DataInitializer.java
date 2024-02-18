@@ -1,7 +1,6 @@
 package edu.hogwarts.studentadmin.application;
 
-import edu.hogwarts.studentadmin.models.House;
-import edu.hogwarts.studentadmin.models.Student;
+import edu.hogwarts.studentadmin.models.*;
 import edu.hogwarts.studentadmin.repositories.CourseRepository;
 import edu.hogwarts.studentadmin.repositories.HouseRepository;
 import edu.hogwarts.studentadmin.repositories.StudentRepository;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Component
@@ -34,6 +32,8 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     public void run(String...args) {
+
+        // Generate houses
         House gryffindor = new House("Gryffindor", "Godric Gryffindor", List.of("Scarlet", "Gold"));
         House hufflepuff = new House("Hufflepuff", "Helga Hufflepuff", List.of("Yellow", "Black"));
         House ravenclaw = new House("Ravenclaw", "Rowen Ravenclaw", List.of("Blue", "Bronze"));
@@ -44,7 +44,41 @@ public class DataInitializer implements CommandLineRunner {
         houseRepository.save(ravenclaw);
         houseRepository.save(slytherin);
 
-        Student harryPotter = new Student("Harry", "James", "Potter", LocalDate.of(1980, Calendar.JULY, 31), "Gryffindor", 1991, 1998, 1, "");
+        // Generate students
+        Student harryPotter = new Student("Harry", "James", "Potter", LocalDate.of(1980, 7, 31), gryffindor, false, 1998, 1998, true);
+        Student hermioneGranger = new Student("Hermione", "Jean", "Granger", LocalDate.of(1979, 9, 19), gryffindor, false, 1991, 1998, true);
+        Student ronaldWeasley = new Student("Ronald", "Bilius", "Weasley", LocalDate.of(1980, 3, 1), gryffindor, false, 1991, 1998, true);
+        Student nevilleLongbottom = new Student("Neville", "", "Longbottom", LocalDate.of(1980, 7, 30), gryffindor, true, 1991, 1998, true);
+        Student dracoMalfoy = new Student("Draco", "Lucious", "Malfoy", LocalDate.of(1980, 6, 5), slytherin, false, 1991, 1998, true);
+        Student gregoryGoyle = new Student("Gregory", "", "Goyle", LocalDate.of(1979, 9, 19), slytherin, false, 1991, 1998, true);
+        Student vincentCrabbe = new Student("Vincent", "", "Crabbe", LocalDate.of(1980, 11, 20), slytherin, false, 1991, 1998, true);
+        Student hannahAbbott = new Student("Hannah", "", "Abbott", LocalDate.of(1979, 12, 5), hufflepuff, false, 1991, 1998, true);
+        Student justinFinch = new Student("Justin", "", "Finch-Fletchley", LocalDate.of(1979, 1, 19), hufflepuff, false, 1991, 1998, true);
+        Student michaelCorner = new Student("Michael", "", "Corner", LocalDate.of(1980, 5, 2), ravenclaw, false, 1991, 1998, true);
+        Student seamusFinnigan = new Student("Seamus", "", "Finnigan", LocalDate.of(1979, 8, 30), gryffindor, false, 1991, 1998, true);
+        Student anthonyGoldstein = new Student("Anthony", "", "Goldstein", LocalDate.of(1979, 1, 30), ravenclaw, false, 1991, 1998, true);
+
+        studentRepository.save(harryPotter);
+        studentRepository.save(hermioneGranger);
+        studentRepository.save(ronaldWeasley);
+        studentRepository.save(nevilleLongbottom);
+        studentRepository.save(dracoMalfoy);
+        studentRepository.save(gregoryGoyle);
+        studentRepository.save(vincentCrabbe);
+        studentRepository.save(hannahAbbott);
+        studentRepository.save(justinFinch);
+        studentRepository.save(michaelCorner);
+        studentRepository.save(seamusFinnigan);
+        studentRepository.save(anthonyGoldstein);
+
+        // Generate teachers
+        Teacher severusSnape = new Teacher("Severus", "", "Snape", LocalDate.of(1960, 1, 9), slytherin, true, EmpType.DECEASED, LocalDate.of(1983, 8, 30), LocalDate.of(1998, 5, 2));
+        teacherRepository.save(severusSnape);
+
+        // Generate courses
+        Course potions = new Course("Potions", 1991, false, severusSnape, List.of(harryPotter, hermioneGranger, ronaldWeasley, nevilleLongbottom, dracoMalfoy, gregoryGoyle, vincentCrabbe, hannahAbbott, justinFinch, michaelCorner, seamusFinnigan, anthonyGoldstein));
+        courseRepository.save(potions);
+
     }
 
 }

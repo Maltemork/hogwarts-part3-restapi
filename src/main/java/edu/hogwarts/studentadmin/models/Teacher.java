@@ -1,7 +1,7 @@
 package edu.hogwarts.studentadmin.models;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Teacher {
@@ -11,14 +11,14 @@ public class Teacher {
     private String firstName;
     private String middleName;
     private String lastName;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @ManyToOne
     private House house;
     private boolean headOfHouse;
     @Enumerated(EnumType.STRING)
     private EmpType employment;
-    private Date employmentStart;
-    private Date employmentEnd;
+    private LocalDate employmentStart;
+    private LocalDate employmentEnd;
 
     //Getters & Setters
 
@@ -51,11 +51,11 @@ public class Teacher {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -83,25 +83,25 @@ public class Teacher {
         this.employment = employment;
     }
 
-    public Date getEmploymentStart() {
+    public LocalDate getEmploymentStart() {
         return employmentStart;
     }
 
-    public void setEmploymentStart(Date employmentStart) {
+    public void setEmploymentStart(LocalDate employmentStart) {
         this.employmentStart = employmentStart;
     }
 
-    public Date getEmploymentEnd() {
+    public LocalDate getEmploymentEnd() {
         return employmentEnd;
     }
 
-    public void setEmploymentEnd(Date employmentEnd) {
+    public void setEmploymentEnd(LocalDate employmentEnd) {
         this.employmentEnd = employmentEnd;
     }
 
     // Constructors
 
-    public Teacher(String firstName, String middleName, String lastName, Date dateOfBirth, House house, boolean headOfHouse, EmpType employment, Date employmentStart, Date employmentEnd) {
+    public Teacher(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, boolean headOfHouse, EmpType employment, LocalDate employmentStart, LocalDate employmentEnd) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -113,7 +113,7 @@ public class Teacher {
         this.employmentEnd = employmentEnd;
     }
 
-    public Teacher(String firstName, String lastName, Date dateOfBirth, House house) {
+    public Teacher(String firstName, String lastName, LocalDate dateOfBirth, House house) {
         this(firstName, "", lastName, dateOfBirth, house, false, null, null, null);
     }
 
