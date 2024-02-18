@@ -1,13 +1,19 @@
 package edu.hogwarts.studentadmin.models;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 
+@Entity
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String middleName;
     private String lastName;
     private Date dateOfBirth;
+    @ManyToOne
     private House house;
     private boolean prefect;
     private int enrollmentYear;

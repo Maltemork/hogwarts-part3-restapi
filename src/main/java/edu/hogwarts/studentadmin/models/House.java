@@ -1,14 +1,19 @@
 package edu.hogwarts.studentadmin.models;
 
-import java.util.Optional;
+import jakarta.persistence.*;
 
+import java.util.Arrays;
+import java.util.List;
+
+@Entity
 public class House {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String founder;
-    private String[] colors;
-
-
+    @ElementCollection
+    private List<String> colors = Arrays.asList("", "");
 
     //Getters & Setters
 
@@ -36,22 +41,24 @@ public class House {
         this.founder = founder;
     }
 
-    public String[] getColors() {
+    public List<String> getColors() {
         return colors;
     }
 
-    public void setColors(String[] colors) {
+    public void setColors(List<String> colors) {
         this.colors = colors;
     }
 
     // Constructors
-    public House(int id, String name,  String founder, String[] colors) {
+    public House() {
+    }
+    public House(int id, String name,  String founder, List<String> colors) {
         this.id = id;
         this.name = name;
         this.founder = founder;
         this.colors = colors;
     }
-    public House(String name, String founder, String[] colors) {
+    public House(String name, String founder, List<String> colors) {
         this.name = name;
         this.founder = founder;
         this.colors = colors;

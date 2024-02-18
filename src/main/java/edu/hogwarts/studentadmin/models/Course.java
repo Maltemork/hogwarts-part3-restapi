@@ -14,9 +14,9 @@ public class Course {
     private String subject;
     private int schoolYear;
     private boolean current;
-    @ManyToOne
+    @OneToOne
     private Teacher teacher;
-    @ManyToMany
+    @OneToMany
     private List<Student> students;
 
 
