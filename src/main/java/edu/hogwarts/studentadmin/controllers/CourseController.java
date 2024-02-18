@@ -49,7 +49,7 @@ public class CourseController {
         if (course.isPresent()) {
             return ResponseEntity.ok(course.get().getTeacher());
         } else {
-            ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -137,6 +137,8 @@ public class CourseController {
             existingCourse.getStudents().remove(studentToDelete.get());
             courseRepository.save(existingCourse);
             return ResponseEntity.ok().body(existingCourse);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 
