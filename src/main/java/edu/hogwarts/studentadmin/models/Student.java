@@ -14,6 +14,8 @@ public class Student {
     private int graduationYear;
     private boolean graduated;
 
+
+
     //Getters & Setters
 
 
@@ -99,6 +101,8 @@ public class Student {
 
     //Constructors
 
+    public Student() {
+    }
 
     public Student(String firstName, String middleName, String lastName, Date dateOfBirth, House house, boolean prefect, int enrollmentYear, int graduationYear, boolean graduated) {
         this.firstName = firstName;
@@ -114,5 +118,17 @@ public class Student {
 
     public Student(String firstName, String lastName, Date dateOfBirth, House house, int enrollmentYear) {
         this(firstName, "", lastName, dateOfBirth, house, false, enrollmentYear, 1998, true);
+    }
+
+    public void copyFromStudent(Student student) {
+        this.setFirstName(student.getFirstName());
+        this.setMiddleName(student.getMiddleName());
+        this.setLastName(student.getLastName());
+        this.setDateOfBirth(student.getDateOfBirth());
+        this.setHouse(student.getHouse());
+        this.setPrefect(student.isPrefect());
+        this.setEnrollmentYear(student.getEnrollmentYear());
+        this.setGraduationYear(student.getGraduationYear());
+        this.setGraduated(student.isGraduated());
     }
 }
