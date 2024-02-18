@@ -1,9 +1,7 @@
 package edu.hogwarts.studentadmin.controllers;
 
 import edu.hogwarts.studentadmin.models.Student;
-import edu.hogwarts.studentadmin.repositories.CourseRepository;
 import edu.hogwarts.studentadmin.repositories.StudentRepository;
-import edu.hogwarts.studentadmin.repositories.TeacherRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,21 +12,16 @@ import java.util.Optional;
 @RestController
 public class StudentController {
     //Fields
-    private final CourseRepository courseRepository;
-    private final TeacherRepository teacherRepository;
     private final StudentRepository studentRepository;
 
     // Constructor
 
 
-    public StudentController(CourseRepository courseRepository, TeacherRepository teacherRepository, StudentRepository studentRepository) {
-        this.courseRepository = courseRepository;
-        this.teacherRepository = teacherRepository;
+    public StudentController(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
     // Mapping
-
     // GET
     @GetMapping
     public List<Student> getAllStudents() {
