@@ -2,7 +2,7 @@ package edu.hogwarts.studentadmin.models;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Student {
@@ -12,7 +12,7 @@ public class Student {
     private String firstName;
     private String middleName;
     private String lastName;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @ManyToOne
     private House house;
     private boolean prefect;
@@ -57,11 +57,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -110,7 +110,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(String firstName, String middleName, String lastName, Date dateOfBirth, House house, boolean prefect, int enrollmentYear, int graduationYear, boolean graduated) {
+    public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, boolean prefect, int enrollmentYear, int graduationYear, boolean graduated) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -122,7 +122,7 @@ public class Student {
         this.graduated = graduated;
     }
 
-    public Student(String firstName, String lastName, Date dateOfBirth, House house, int enrollmentYear) {
+    public Student(String firstName, String lastName, LocalDate dateOfBirth, House house, int enrollmentYear) {
         this(firstName, "", lastName, dateOfBirth, house, false, enrollmentYear, 1998, true);
     }
 
