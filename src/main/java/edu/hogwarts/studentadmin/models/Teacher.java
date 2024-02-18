@@ -1,14 +1,21 @@
 package edu.hogwarts.studentadmin.models;
+import jakarta.persistence.*;
+
 import java.util.Date;
 
+@Entity
 public class Teacher {
+    @Id
+    @GeneratedValue
     private int id;
     private String firstName;
     private String middleName;
     private String lastName;
     private Date dateOfBirth;
+    @ManyToOne
     private House house;
     private boolean headOfHouse;
+    @Enumerated(EnumType.STRING)
     private EmpType employment;
     private Date employmentStart;
     private Date employmentEnd;
