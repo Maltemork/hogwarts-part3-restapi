@@ -36,6 +36,7 @@ public class HouseController {
     // POST
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public House createHouse(@RequestBody House house) {
         return houseRepository.save(house);
     }
