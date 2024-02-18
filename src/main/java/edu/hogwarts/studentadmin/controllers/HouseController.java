@@ -23,6 +23,7 @@ public class HouseController {
     }
 
     // Mapping
+    // GET
     @GetMapping
     public List<House> getAllHouses() {
         return houseRepository.findAll();
@@ -34,11 +35,14 @@ public class HouseController {
         return ResponseEntity.of(house);
     }
 
+    // POST
+
     @PostMapping
     public House createHouse(@RequestBody House house) {
         return houseRepository.save(house);
     }
 
+    //PUT
     @PutMapping("/{id}")
     public ResponseEntity<House> updateHouse(@PathVariable int id, @RequestBody House house) {
         Optional<House> houseGettingUpdated = houseRepository.findById(id);
@@ -54,7 +58,7 @@ public class HouseController {
             return ResponseEntity.status(HttpStatus.CREATED).body(savedHouse);
         }
     }
-
+    // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<House> deleteHouse(@PathVariable int id) {
         Optional<House> houseToDelete = houseRepository.findById(id);
