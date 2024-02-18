@@ -73,11 +73,7 @@ public class Course {
     }
 
     // Constructors
-    public Course() {
-
-    }
-
-    // Constructors
+    public Course() {}
     public Course(String subject, int schoolYear, boolean current, Teacher teacher, List<Student> students) {
         this.subject = subject;
         this.schoolYear = schoolYear;
