@@ -1,29 +1,24 @@
 package edu.hogwarts.studentadmin.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.springframework.context.annotation.Primary;
 
+import javax.annotation.processing.Generated;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Entity
 public class House {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
     private String name;
     private String founder;
     @ElementCollection
-    private List<String> colors = Arrays.asList("", "");
+    private List<String> colors = new ArrayList<>();
 
     //Getters & Setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -52,13 +47,7 @@ public class House {
     // Constructors
     public House() {
     }
-    public House(int id, String name,  String founder, List<String> colors) {
-        this.id = id;
-        this.name = name;
-        this.founder = founder;
-        this.colors = colors;
-    }
-    public House(String name, String founder, List<String> colors) {
+    public House(String name,  String founder, List<String> colors) {
         this.name = name;
         this.founder = founder;
         this.colors = colors;
@@ -70,7 +59,7 @@ public class House {
         this.setColors(otherHouse.getColors());
     }
     public House(House house) {
-        this(house.getId(), house.getName(), house.getFounder(), house.getColors());
+        this(house.getName(), house.getFounder(), house.getColors());
     }
 }
 

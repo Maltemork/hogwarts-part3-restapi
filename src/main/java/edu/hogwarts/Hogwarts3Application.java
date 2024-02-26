@@ -8,6 +8,8 @@ public class Hogwarts3Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Hogwarts3Application.class, args);
+
+
     }
 
 }

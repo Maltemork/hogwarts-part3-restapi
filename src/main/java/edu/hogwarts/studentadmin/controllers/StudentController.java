@@ -66,4 +66,32 @@ public class StudentController {
         studentRepository.deleteById(id);
         return ResponseEntity.of(studentToDelete);
     }
+
+    // PATCH
+    @PatchMapping("/{id}")
+    public ResponseEntity<Student> patchStudent(@PathVariable int id, @RequestBody Student student) {
+        Optional<Student> studentToPatch = studentRepository.findById(id);
+        if (studentToPatch.isPresent()) {
+            Student existingStudent = studentToPatch.get();
+            existingStudent.setPrefect(student.isPrefect());
+            Student updatedStudent = studentRepository.save(existingStudent);
+            return ResponseEntity.ok().body(updatedStudent);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{id}/schoolYear")
+    public ResponseEntity<Student> patchStudentSchoolYear(@PathVariable int id, @RequestBody Student student) {
+        Optional<Student> studentToPatch = studentRepository.findById(id);
+        if (studentToPatch.isPresent()) {
+            Student existingStudent = studentToPatch.get();
+            existingStudent.setSchoolYear(student.getSchoolYear());
+            Student updatedStudent = studentRepository.save(existingStudent);
+            return ResponseEntity.ok().body(updatedStudent);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

@@ -1,6 +1,8 @@
 package edu.hogwarts.studentadmin.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import edu.hogwarts.studentadmin.repositories.HouseRepository;
 
 import java.time.LocalDate;
 
@@ -8,17 +10,22 @@ import java.time.LocalDate;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnoreProperties
     private int id;
     private String firstName;
     private String middleName;
     private String lastName;
     private LocalDate dateOfBirth;
-    @ManyToOne
-    private House house;
+
+    @JoinColumn(name = "house")
+    private String house;
+
     private boolean prefect;
     private int enrollmentYear;
     private int graduationYear;
     private boolean graduated;
+
+    private int schoolYear;
 
 
 
@@ -65,11 +72,11 @@ public class Student {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public House getHouse() {
+    public String getHouse() {
         return house;
     }
 
-    public void setHouse(House house) {
+    public void setHouse(String house) {
         this.house = house;
     }
 
@@ -105,12 +112,20 @@ public class Student {
         this.graduated = graduated;
     }
 
+    public int getSchoolYear() {
+        return enrollmentYear;
+    }
+
+    public void setSchoolYear(int schoolYear) {
+        this.schoolYear = schoolYear;
+    }
+
     //Constructors
 
     public Student() {
     }
 
-    public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, House house, boolean prefect, int enrollmentYear, int graduationYear, boolean graduated) {
+    public Student(String firstName, String middleName, String lastName, LocalDate dateOfBirth, String house, boolean prefect, int enrollmentYear, int graduationYear, boolean graduated) {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
@@ -122,9 +137,42 @@ public class Student {
         this.graduated = graduated;
     }
 
-    public Student(String firstName, String lastName, LocalDate dateOfBirth, House house, int enrollmentYear) {
+    public Student(String firstName, String lastName, LocalDate dateOfBirth, String house, int enrollmentYear) {
         this(firstName, "", lastName, dateOfBirth, house, false, enrollmentYear, 1998, true);
     }
+
+    // Student constructor for fullName.
+    public Student(String fullName, LocalDate dateOfBirth, String house, int enrollmentYear) {
+        String[] names = fullName.split(" ");
+        if (names.length == 2) {
+            this.firstName = names[0];
+            this.lastName = names[1];
+        } else if (names.length == 3) {
+            this.firstName = names[0];
+            this.middleName = names[1];
+            this.lastName = names[2];
+        }
+        this.dateOfBirth = dateOfBirth;
+        this.house = house;
+        this.enrollmentYear = enrollmentYear;
+        this.graduationYear = 1998;
+        this.graduated = true;
+    }
+
+    public Student(String fullName, String house) {
+        String[] names = fullName.split(" ");
+        if (names.length == 2) {
+            this.firstName = names[0];
+            this.lastName = names[1];
+        } else if (names.length == 3) {
+            this.firstName = names[0];
+            this.middleName = names[1];
+            this.lastName = names[2];
+        }
+        this.house = house;
+    }
+
+
 
     public void copyFromStudent(Student student) {
         this.setFirstName(student.getFirstName());
@@ -136,5 +184,9 @@ public class Student {
         this.setEnrollmentYear(student.getEnrollmentYear());
         this.setGraduationYear(student.getGraduationYear());
         this.setGraduated(student.isGraduated());
+    }
+
+    public String getFullName() {
+        return this.getFirstName() + " " + this.getMiddleName() + " " + this.getLastName();
     }
 }

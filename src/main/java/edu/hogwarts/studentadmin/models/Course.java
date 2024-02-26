@@ -22,6 +22,7 @@ public class Course {
 
 
 
+
     // Getters & Setters
 
     public int getId() {
@@ -74,6 +75,13 @@ public class Course {
 
     // Constructors
     public Course() {}
+
+    public Course(String subject, int schoolYear, boolean current, Teacher teacher) {
+        this.subject = subject;
+        this.schoolYear = schoolYear;
+        this.current = current;
+        this.teacher = teacher;
+    }
     public Course(String subject, int schoolYear, boolean current, Teacher teacher, List<Student> students) {
         this.subject = subject;
         this.schoolYear = schoolYear;

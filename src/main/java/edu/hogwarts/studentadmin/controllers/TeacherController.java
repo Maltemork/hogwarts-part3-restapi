@@ -61,4 +61,47 @@ public class TeacherController {
         teacherRepository.deleteById(id);
         return ResponseEntity.of(teacherToDelete);
     }
+
+    // PATCH
+    @PatchMapping("/{id}/headOfHouse")
+    public ResponseEntity<Teacher> changeHeadOfHouse(@PathVariable int id, @RequestBody Teacher teacher) {
+        Optional<Teacher> teacherToChange = teacherRepository.findById(id);
+        if (teacherToChange.isPresent()) {
+            Teacher existingTeacher = teacherToChange.get();
+            existingTeacher.setHeadOfHouse(teacher.isHeadOfHouse());
+            Teacher updatedTeacher = teacherRepository.save(existingTeacher);
+            return ResponseEntity.ok().body(updatedTeacher);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Patch mapping for changing the employment status.
+    @PatchMapping("/{id}/employment")
+    public ResponseEntity<Teacher> changeEmployment(@PathVariable int id, @RequestBody Teacher teacher) {
+        Optional<Teacher> teacherToChange = teacherRepository.findById(id);
+        if (teacherToChange.isPresent()) {
+            Teacher existingTeacher = teacherToChange.get();
+            existingTeacher.setEmployment(teacher.getEmployment());
+            Teacher updatedTeacher = teacherRepository.save(existingTeacher);
+            return ResponseEntity.ok().body(updatedTeacher);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    // Patch mapping for changing the employment end date.
+    @PatchMapping("/{id}/employmentEnd")
+    public ResponseEntity<Teacher> changeEmploymentEnd(@PathVariable int id, @RequestBody Teacher teacher) {
+        Optional<Teacher> teacherToChange = teacherRepository.findById(id);
+        if (teacherToChange.isPresent()) {
+            Teacher existingTeacher = teacherToChange.get();
+            existingTeacher.setEmploymentEnd(teacher.getEmploymentEnd());
+            Teacher updatedTeacher = teacherRepository.save(existingTeacher);
+            return ResponseEntity.ok().body(updatedTeacher);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

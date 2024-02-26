@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -45,18 +46,18 @@ public class DataInitializer implements CommandLineRunner {
         houseRepository.save(slytherin);
 
         // Generate students
-        Student harryPotter = new Student("Harry", "James", "Potter", LocalDate.of(1980, 7, 31), gryffindor, false, 1998, 1998, true);
-        Student hermioneGranger = new Student("Hermione", "Jean", "Granger", LocalDate.of(1979, 9, 19), gryffindor, false, 1991, 1998, true);
-        Student ronaldWeasley = new Student("Ronald", "Bilius", "Weasley", LocalDate.of(1980, 3, 1), gryffindor, false, 1991, 1998, true);
-        Student nevilleLongbottom = new Student("Neville", "", "Longbottom", LocalDate.of(1980, 7, 30), gryffindor, true, 1991, 1998, true);
-        Student dracoMalfoy = new Student("Draco", "Lucious", "Malfoy", LocalDate.of(1980, 6, 5), slytherin, false, 1991, 1998, true);
-        Student gregoryGoyle = new Student("Gregory", "", "Goyle", LocalDate.of(1979, 9, 19), slytherin, false, 1991, 1998, true);
-        Student vincentCrabbe = new Student("Vincent", "", "Crabbe", LocalDate.of(1980, 11, 20), slytherin, false, 1991, 1998, true);
-        Student hannahAbbott = new Student("Hannah", "", "Abbott", LocalDate.of(1979, 12, 5), hufflepuff, false, 1991, 1998, true);
-        Student justinFinch = new Student("Justin", "", "Finch-Fletchley", LocalDate.of(1979, 1, 19), hufflepuff, false, 1991, 1998, true);
-        Student michaelCorner = new Student("Michael", "", "Corner", LocalDate.of(1980, 5, 2), ravenclaw, false, 1991, 1998, true);
-        Student seamusFinnigan = new Student("Seamus", "", "Finnigan", LocalDate.of(1979, 8, 30), gryffindor, false, 1991, 1998, true);
-        Student anthonyGoldstein = new Student("Anthony", "", "Goldstein", LocalDate.of(1979, 1, 30), ravenclaw, false, 1991, 1998, true);
+        Student harryPotter = new Student("Harry", "James", "Potter", LocalDate.of(1980, 7, 31), "Gryffindor", false, 1991, 1998, true);
+        Student hermioneGranger = new Student("Hermione", "Jean", "Granger", LocalDate.of(1979, 9, 19), "Gryffindor", false, 1991, 1998, true);
+        Student ronaldWeasley = new Student("Ronald", "Bilius", "Weasley", LocalDate.of(1980, 3, 1), "Gryffindor", false, 1991, 1998, true);
+        Student nevilleLongbottom = new Student("Neville", "", "Longbottom", LocalDate.of(1980, 7, 30), "Gryffindor", true, 1991, 1998, true);
+        Student dracoMalfoy = new Student("Draco", "Lucious", "Malfoy", LocalDate.of(1980, 6, 5), "Slytherin", false, 1991, 1998, true);
+        Student gregoryGoyle = new Student("Gregory", "", "Goyle", LocalDate.of(1979, 9, 19), "Slytherin", false, 1991, 1998, true);
+        Student vincentCrabbe = new Student("Vincent", "", "Crabbe", LocalDate.of(1980, 11, 20), "Slytherin", false, 1991, 1998, true);
+        Student hannahAbbott = new Student("Hannah", "", "Abbott", LocalDate.of(1979, 12, 5), "Hufflepuff", false, 1991, 1998, true);
+        Student justinFinch = new Student("Justin", "", "Finch-Fletchley", LocalDate.of(1979, 1, 19), "Hufflepuff", false, 1991, 1998, true);
+        Student michaelCorner = new Student("Michael", "", "Corner", LocalDate.of(1980, 5, 2), "Ravenclaw", false, 1991, 1998, true);
+        Student seamusFinnigan = new Student("Seamus", "", "Finnigan", LocalDate.of(1979, 8, 30), "Gryffindor", false, 1991, 1998, true);
+        Student anthonyGoldstein = new Student("Anthony", "", "Goldstein", LocalDate.of(1979, 1, 30), "Ravenclaw", false, 1991, 1998, true);
 
         studentRepository.save(harryPotter);
         studentRepository.save(hermioneGranger);
@@ -76,8 +77,15 @@ public class DataInitializer implements CommandLineRunner {
         teacherRepository.save(severusSnape);
 
         // Generate courses
-        Course potions = new Course("Potions", 1991, false, severusSnape, List.of(harryPotter, hermioneGranger, ronaldWeasley, nevilleLongbottom, dracoMalfoy, gregoryGoyle, vincentCrabbe, hannahAbbott, justinFinch, michaelCorner, seamusFinnigan, anthonyGoldstein));
+        Course potions = new Course("Potions", 1991, false, severusSnape);
         courseRepository.save(potions);
+
+
+
+        Student foundStudent = studentRepository.findByFirstName("Harry");
+        System.out.println(foundStudent.getHouse());
+
+
 
     }
 

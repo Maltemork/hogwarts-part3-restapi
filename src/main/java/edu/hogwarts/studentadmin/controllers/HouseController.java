@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,45 +24,15 @@ public class HouseController {
     // Mapping
     // GET
     @GetMapping
-    public List<House> getAllHouses() {
-        return houseRepository.findAll();
+    public ArrayList<House> getAllHouses() {
+        return new ArrayList<>(houseRepository.findAll());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<House> getHouse(@PathVariable int id) {
-        Optional<House> house = houseRepository.findById(id);
+    @GetMapping("/{name}")
+    public ResponseEntity<House> getHouse(@PathVariable String name) {
+        // I want to find the house by name. I need to change the parameter type to String
+        Optional<House> house;
+        house = houseRepository.findByName(name);
         return ResponseEntity.of(house);
-    }
-
-    // POST
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public House createHouse(@RequestBody House house) {
-        return houseRepository.save(house);
-    }
-
-    //PUT
-    @PutMapping("/{id}")
-    public ResponseEntity<House> updateHouse(@PathVariable int id, @RequestBody House house) {
-        Optional<House> houseGettingUpdated = houseRepository.findById(id);
-
-        if (houseGettingUpdated.isPresent()) {
-            House existingHouse = houseGettingUpdated.get();
-            existingHouse.copyHouse(house);
-            House updatedHouse = houseRepository.save(existingHouse);
-            return ResponseEntity.ok().body(updatedHouse);
-        } else {
-            House newHouse = new House(house);
-            House savedHouse = houseRepository.save(newHouse);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedHouse);
-        }
-    }
-    // DELETE
-    @DeleteMapping("/{id}")
-    public ResponseEntity<House> deleteHouse(@PathVariable int id) {
-        Optional<House> houseToDelete = houseRepository.findById(id);
-        houseRepository.deleteById(id);
-        return ResponseEntity.of(houseToDelete);
     }
 }
